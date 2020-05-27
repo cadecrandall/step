@@ -1,3 +1,27 @@
+.sidebar {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #556e78;
+}
+
+.sidebar ol {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar ol li {
+  list-style-type: square; 
+  display: inline;
+}
+
+span#name {
+  font-weight: bold;
+  font-size: 64px;
+}
+
 #content {
   margin-left: auto;
   margin-right: auto;
@@ -9,3 +33,4 @@
   border: 1px solid green;
   padding: 3px;
 }
+
