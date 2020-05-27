@@ -1,25 +1,44 @@
 .sidebar {
   font-family: Arial, Helvetica, sans-serif;
+  position: fixed;
+  width: 20%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  text-align: right;
+  background-color: #44634c;
+  color: #efefef;
 }
 
 .sidebar a {
   text-decoration: none;
-  color: #556e78;
+  color: #efefef;
 }
 
-.sidebar ol {
+.sidebar ul {
   margin: 0;
   padding: 0;
 }
 
-.sidebar ol li {
+.sidebar ul li {
   list-style-type: square; 
   display: inline;
 }
 
-span#name {
+.sidebar ol {
+  padding-top: 100px;
+}
+
+.sidebar ol li {
+  list-style-type: none;
+  font-size: 30px;
+  margin: 10px;
+}
+
+#name {
   font-weight: bold;
-  font-size: 64px;
+  font-size: 100px;
 }
 
 #content {
