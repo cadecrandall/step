@@ -4,6 +4,8 @@
   width: 650px;
 }
 
-#greeting-container {
+#name-container {
   margin-top: 20px;
+  border: 1px solid green;
+  padding: 3px;
 }

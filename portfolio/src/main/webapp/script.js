@@ -13,16 +13,16 @@
 // limitations under the License.
 
 /**
- * Adds a random greeting to the page.
+ * Adds a random team name to the page.
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+function addRandomTeamName() {
+  const teamNames =
+      ["Wow, she's really good!", "Harambe", "Kevin and the Zits", "*villager noises*", "Very cool, thanks Kanye", "Ligma Kappa"];
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+  // Pick a random name.
+  const name = teamNames[Math.floor(Math.random() * teamNames.length)];
 
   // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+  const nameContainer = document.getElementById('name-container');
+  nameContainer.innerText = name;
 }
