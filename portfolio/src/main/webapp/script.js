@@ -13,6 +13,13 @@
 // limitations under the License.
 
 /**
+ * Loads sidebar navigation from sidebar.html
+ */
+window.onload = function() {
+  $(".sidebar").load("sidebar.html");
+};
+
+/**
  * Adds a random team name to the page.
  */
 function addRandomTeamName() {
