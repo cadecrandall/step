@@ -13,16 +13,14 @@
 // limitations under the License.
 
 /**
- * Adds a random team name to the page.
+ * Loads sidebar navigation from sidebar.html and underlines current page
  */
-function addRandomTeamName() {
-  const teamNames =
-      ["Wow, she's really good!", "Harambe", "Kevin and the Zits", "*villager noises*", "Very cool, thanks Kanye", "Ligma Kappa"];
 
-  // Pick a random name.
-  const name = teamNames[Math.floor(Math.random() * teamNames.length)];
-
-  // Add it to the page.
-  const nameContainer = document.getElementById('name-container');
-  nameContainer.innerText = name;
+window.onload = function() {
+  $(".sidebar").load("sidebar.html", function() {
+    var currentPageId = window.location.pathname.slice(1, -5);
+    document.getElementById(currentPageId).style.textDecoration = "underline";
+  })
 }
+
+
