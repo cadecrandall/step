@@ -1,0 +1,10 @@
+.banner-div {
+  width: inherit;
+  height: 300px;
+  overflow: hidden;
+}
+
+.banner-pic {
+  display: block;
+  width: 100%;
+}
