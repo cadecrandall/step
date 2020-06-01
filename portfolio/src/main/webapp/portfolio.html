@@ -1,17 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Cade Crandall - Portfolio</title>
-    <link rel="stylesheet" href="common.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="script.js"></script>
-  </head>
-  <body>
-    <div class="sidebar">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Cade Crandall - Portfolio</title>
+	<link rel="stylesheet" href="common.css">
+	<link rel="stylesheet" href="portfolio.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="script.js"></script>
+</head>
+
+<body>
+	<div class="sidebar"></div>
+  <div id="greeting"></div>
+	<div id="content">
+		<div class="card">
+			<h1>Title of Project</h1>
+			<div class="banner-img-crop">
+				<img src="images/monkey.JPG" id="banner-pic">
+      </div>
+      <p>
+        Details about project go here. Something about Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+      </p>
     </div>
-    <div id="content">
-      Portfolio Placeholder
-    </div>  
-  </body>
+    <button onclick="hello()">Click me for dynamic content!</button>
+    <div id="button-text"></div>
+</body>
+
 </html>

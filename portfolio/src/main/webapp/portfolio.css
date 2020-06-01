@@ -1,0 +1,10 @@
+.banner-img-crop {
+  width: inherit;
+  height: 300px;
+  overflow: hidden;
+}
+
+.banner-img {
+  display: block;
+  width: 100%;
+}

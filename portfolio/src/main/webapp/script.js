@@ -23,4 +23,8 @@ window.onload = function() {
   })
 }
 
-
+async function hello() {
+  const response = await fetch('/data');
+  const greeting = await response.text();
+  document.getElementById('button-text').innerHTML = greeting;
+}
