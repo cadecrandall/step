@@ -28,8 +28,10 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    // convert three messages to JSON object
-    ArrayList<String> messages = new ArrayList<String>(Arrays.asList("My dog is sitting next to me", "It is hot outside", "ArrayList<String> == vector<string>"));
+    ArrayList<String> messages = new ArrayList<String>(Arrays.asList(
+        "My dog is sitting next to me", "It is hot outside", "ArrayList<String> == vector<string>"));
+
+    // convert ArrayList to json array
     String json = convertToJson(messages);
 
     // Send the JSON as the response
@@ -37,9 +39,9 @@ public class DataServlet extends HttpServlet {
     response.getWriter().println(json);
 
   }
-  private String convertToJson(ArrayList<String> m) {
+  private String convertToJson(ArrayList<String> messageList) {
     Gson jsonConverter = new Gson();
-    String output = jsonConverter.toJson(m);
+    String output = jsonConverter.toJson(messageList);
     return output;
   }
 }
