@@ -16,11 +16,12 @@
   padding: 10px;
   padding-bottom: 5px;
   margin: 10px;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .card h1 {
   font-family: 'Roboto Slab', Arial, Helvetica, sans-serif;
-  text-align: center;
   padding: 0px;
   padding-bottom: 5px;
   margin: 0px;
