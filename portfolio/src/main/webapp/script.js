@@ -22,9 +22,13 @@ window.onload = function() {
     document.getElementById(currentPageId).style.textDecoration = "underline";
   })
 }
-
 async function hello() {
   const response = await fetch('/data');
-  const greeting = await response.text();
-  document.getElementById('button-text').innerHTML = greeting;
+  const messageArr = await response.json();
+
+  var outputString = "";
+  for (var i = 0; i < messageArr.length; i++) {
+    outputString += messageArr[i] + ", "; 
+  }
+  document.getElementById('button-text').innerHTML = outputString;
 }
