@@ -28,7 +28,7 @@ async function displayComments() {
   const response = await fetch('/data');
   const messageArr = await response.json();
 
-  // split messageArr into paragraph elements
+  // Split messageArr into paragraph elements
   var output = messageArr.map(str => "<p>" + str + "</p>");
   document.getElementById('button-text').innerHTML = output.join("");
 }

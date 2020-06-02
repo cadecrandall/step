@@ -31,7 +31,7 @@ public class DataServlet extends HttpServlet {
     ArrayList<String> messages = new ArrayList<String>(Arrays.asList(
         "My dog is sitting next to me", "It is hot outside", "ArrayList<String> == vector<string>"));
 
-    // convert ArrayList to json array
+    // Convert ArrayList to json array
     String json = convertToJson(messages);
 
     // Send the JSON as the response
