@@ -24,13 +24,11 @@ window.onload = function() {
 }
 
 
-async function hello() {
+async function displayComments() {
   const response = await fetch('/data');
   const messageArr = await response.json();
 
-  var outputString = "";
-  for (var i = 0; i < messageArr.length; i++) {
-    outputString += "<p>" + messageArr[i] + "</p>"; 
-  }
-  document.getElementById('button-text').innerHTML = outputString;
+  // split messageArr into paragraph elements
+  var output = messageArr.map(str => "<p>" + str + "</p>");
+  document.getElementById('button-text').innerHTML = output.join("");
 }
