@@ -32,3 +32,9 @@ async function displayComments() {
   var output = messageArr.map(str => "<p>" + str + "</p>");
   document.getElementById('button-text').innerHTML = output.join("");
 }
+
+function createParagraphElem(text) {
+  const pElement = document.createElement('p');
+  pElement.innerText = text;
+  return pElement;
+}
