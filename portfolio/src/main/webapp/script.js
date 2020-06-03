@@ -23,8 +23,12 @@ window.onload = function() {
   })
 }
 
-async function hello() {
+
+async function displayComments() {
   const response = await fetch('/data');
-  const greeting = await response.text();
-  document.getElementById('button-text').innerHTML = greeting;
+  const messageArr = await response.json();
+
+  // Split messageArr into paragraph elements
+  var output = messageArr.map(str => "<p>" + str + "</p>");
+  document.getElementById('button-text').innerHTML = output.join("");
 }

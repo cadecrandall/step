@@ -1,5 +1,5 @@
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   background-color: #EFF1ED;
   color: #242423;
 }
@@ -50,11 +50,6 @@ a:hover {
   text-decoration: underline;
 }
 
-#current-page {
-  font-weight: bolder;
-  text-decoration: underline;
-}
-
 #name {
   font-weight: bolder;
   font-size: 65px;
@@ -66,7 +61,7 @@ a:hover {
   padding-left: 300px;
   margin-left: auto;
   margin-right: auto;
-  width: 650px;
+  width: 1000px;
 }
 
 #name-container {
