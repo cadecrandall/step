@@ -30,6 +30,18 @@
       </p>
       <div class="comments">
         <h2>Comments</h2>
+        <div id="compose-comment">
+          <form autocomplete="on" action="/data" method="POST">
+            <label for="username">Name</label><br>
+            <input type="text" id="username" name="username"><br>
+            <label for="subject">Subject</label><br>
+            <input type="text" id="subject" name="subject"><br>
+            <label for="comment-message">Comment</label><br>
+            <input type="text" id="comment-message" name="comment-message" size="90" style="height:100px;"><br>
+            <input type="submit">
+          </form>
+        </div>  
+
         <div id="button-text"></div> 
         <button onclick="displayComments()">Load comments</button>
          
