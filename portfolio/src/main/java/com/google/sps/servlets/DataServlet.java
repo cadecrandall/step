@@ -22,26 +22,41 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import com.google.gson.Gson;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
+
+  public ArrayList<String> comments = new ArrayList<>();
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    ArrayList<String> messages = new ArrayList<String>(Arrays.asList(
-        "My dog is sitting next to me", "It is hot outside", "ArrayList<String> == vector<string>"));
-
-    // Convert ArrayList to json array
-    String json = convertToJson(messages);
-
+    String json = "test";
     // Send the JSON as the response
-    response.setContentType("application/json;");
+    response.setContentType("text/html;");
     response.getWriter().println(json);
-
   }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String newComment = parseForm(request);
+    comments.add(newComment);
+    response.sendRedirect("/portfolio.html");   // return user to portfolio page after comment is posted
+  }
+
+
   private String convertToJson(ArrayList<String> messageList) {
     Gson jsonConverter = new Gson();
     String output = jsonConverter.toJson(messageList);
     return output;
+  }
+
+  // private function, return an array of name, subject, and comment from the HTTP request
+  // TODO: return an object or ArrayList of all 3 fields from form
+  private String parseForm(HttpServletRequest request) {
+    // String name = request.getParameter("username");
+    // String subject = request.getParameter("subject");
+    String message = request.getParameter("comment-message");
+    return message;
   }
 }
