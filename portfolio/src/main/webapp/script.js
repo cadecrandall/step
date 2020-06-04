@@ -21,6 +21,7 @@ window.onload = function() {
     var currentPageId = window.location.pathname.slice(1, -5);
     document.getElementById(currentPageId).style.textDecoration = "underline";
   })
+  displayComments();
 }
 
 
@@ -30,5 +31,5 @@ async function displayComments() {
 
   // Split messageArr into paragraph elements
   var output = messageArr.map(str => "<p>" + str + "</p>");
-  document.getElementById('button-text').innerHTML = output.join("");
+  document.getElementById('comments-field').innerHTML = output.join("");
 }
