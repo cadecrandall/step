@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import com.google.gson.Gson;
+import com.google.sps.data.Comment;
 
 
 @WebServlet("/data")
@@ -34,9 +35,16 @@ public class DataServlet extends HttpServlet {
 
   private static final String CONTENT_TYPE = "text/html;";
   private static final String REDIRECT_LINK = "/portfolio.html";
+
   private static final String COMMENT_FORM_ID = "comment-message";
-  private static final String MESSAGE_PROPERTY = "message";
+  private static final String USERNAME_FORM_ID = "username";
+  private static final String SUBJECT_FORM_ID = "subject";
+
+  private static final String USERNAME_PROPERTY = "username";
+  private static final String SUBJECT_PROPERTY = "subject";
   private static final String TIMESTAMP_PROPERTY = "timestamp";
+  private static final String MESSAGE_PROPERTY = "message";
+
   private static final String COMMENT_ENTITY = "Comment";
 
   @Override
@@ -45,9 +53,11 @@ public class DataServlet extends HttpServlet {
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
-    ArrayList<String> comments = new ArrayList<>();
+    ArrayList<Comment> comments = new ArrayList<>();
+
+    // TODO: constructor should take entity object
     for (Entity entity : results.asIterable()) {
-      String currentComment = (String) entity.getProperty(MESSAGE_PROPERTY;
+      Comment currentComment = new Comment(entity);
       comments.add(currentComment);
     }
 
@@ -58,12 +68,7 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String message = parseForm(request);
-    long timestamp = System.currentTimeMillis();
-
-    Entity commentEntity = new Entity(COMMENT_ENTITY);
-    commentEntity.setProperty(MESSAGE_PROPERTY, message);
-    commentEntity.setProperty(TIMESTAMP_PROPERTY, timestamp);
+    Entity commentEntity = parseForm(request);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
@@ -73,7 +78,7 @@ public class DataServlet extends HttpServlet {
   }
 
 
-  private String convertToJson(ArrayList<String> messageList) {
+  private String convertToJson(ArrayList<Comment> messageList) {
     Gson jsonConverter = new Gson();
     String output = jsonConverter.toJson(messageList);
     return output;
@@ -81,8 +86,18 @@ public class DataServlet extends HttpServlet {
 
 
   // TODO: return an object or ArrayList of all 3 fields from form
-  private String parseForm(HttpServletRequest request) {
+  private Entity parseForm(HttpServletRequest request) {
+    String name = request.getParameter(USERNAME_FORM_ID);
+    String subject = request.getParameter(SUBJECT_FORM_ID);
+    long timestamp = System.currentTimeMillis();
     String message = request.getParameter(COMMENT_FORM_ID);
-    return message;
+
+    Entity commentEntity = new Entity(COMMENT_ENTITY);
+    commentEntity.setProperty(USERNAME_PROPERTY, name);
+    commentEntity.setProperty(SUBJECT_PROPERTY, subject);
+    commentEntity.setProperty(MESSAGE_PROPERTY, message);
+    commentEntity.setProperty(TIMESTAMP_PROPERTY, timestamp);
+
+    return commentEntity;
   }
 }
