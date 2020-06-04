@@ -35,16 +35,19 @@ public class DataServlet extends HttpServlet {
   private static final String CONTENT_TYPE = "text/html;";
   private static final String REDIRECT_LINK = "/portfolio.html";
   private static final String COMMENT_FORM_ID = "comment-message";
+  private static final String MESSAGE_PROPERTY = "message";
+  private static final String TIMESTAMP_PROPERTY = "timestamp";
+  private static final String COMMENT_ENTITY = "Comment";
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    Query query = new Query(COMMENT_ENTITY).addSort(TIMESTAMP_PROPERTY, SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
     ArrayList<String> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
-      String currentComment = (String) entity.getProperty("message");
+      String currentComment = (String) entity.getProperty(MESSAGE_PROPERTY;
       comments.add(currentComment);
     }
 
@@ -58,9 +61,9 @@ public class DataServlet extends HttpServlet {
     String message = parseForm(request);
     long timestamp = System.currentTimeMillis();
 
-    Entity commentEntity = new Entity("Comment");
-    commentEntity.setProperty("message", message);
-    commentEntity.setProperty("timestamp", timestamp);
+    Entity commentEntity = new Entity(COMMENT_ENTITY);
+    commentEntity.setProperty(MESSAGE_PROPERTY, message);
+    commentEntity.setProperty(TIMESTAMP_PROPERTY, timestamp);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
