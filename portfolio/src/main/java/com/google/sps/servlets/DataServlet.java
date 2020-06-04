@@ -30,7 +30,6 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
     String json = convertToJson(comments);
     // Send the JSON as the response
     response.setContentType("text/html;");
@@ -41,7 +40,8 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String newComment = parseForm(request);
     comments.add(newComment);
-    response.sendRedirect("/portfolio.html");   // return user to portfolio page after comment is posted
+    // Return user to portfolio page after comment is posted
+    response.sendRedirect("/portfolio.html");   
   }
 
 
@@ -51,11 +51,9 @@ public class DataServlet extends HttpServlet {
     return output;
   }
 
-  // private function, return an array of name, subject, and comment from the HTTP request
+
   // TODO: return an object or ArrayList of all 3 fields from form
   private String parseForm(HttpServletRequest request) {
-    // String name = request.getParameter("username");
-    // String subject = request.getParameter("subject");
     String message = request.getParameter("comment-message");
     return message;
   }
