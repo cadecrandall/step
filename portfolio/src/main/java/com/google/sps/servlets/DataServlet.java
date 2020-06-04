@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,16 +35,21 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String json = convertToJson(comments);
+    // String json = convertToJson(comments);
     // Send the JSON as the response
     response.setContentType(CONTENT_TYPE);
+    String json = ""; 
     response.getWriter().println(json);
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String newComment = parseForm(request);
-    comments.add(newComment);
+    String message = parseForm(request);
+    Entity commentEntity = new Entity("Comment");
+    commentEntity.setProperty("message", message);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(commentEntity);
+
     // Return user to portfolio page after comment is posted
     response.sendRedirect(REDIRECT_LINK);   
   }
