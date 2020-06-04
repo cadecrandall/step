@@ -26,13 +26,15 @@ import com.google.gson.Gson;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  public ArrayList<String> comments = new ArrayList<>();
+  private static final String CONTENT_TYPE = "text/html;";
+  private static final String REDIRECT_LINK = "/portfolio.html";
+  private static final String COMMENT_FORM_ID = "comment-message";
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String json = convertToJson(comments);
     // Send the JSON as the response
-    response.setContentType("text/html;");
+    response.setContentType(CONTENT_TYPE);
     response.getWriter().println(json);
   }
 
@@ -41,7 +43,7 @@ public class DataServlet extends HttpServlet {
     String newComment = parseForm(request);
     comments.add(newComment);
     // Return user to portfolio page after comment is posted
-    response.sendRedirect("/portfolio.html");   
+    response.sendRedirect(REDIRECT_LINK);   
   }
 
 
@@ -54,7 +56,7 @@ public class DataServlet extends HttpServlet {
 
   // TODO: return an object or ArrayList of all 3 fields from form
   private String parseForm(HttpServletRequest request) {
-    String message = request.getParameter("comment-message");
+    String message = request.getParameter(COMMENT_FORM_ID);
     return message;
   }
 }
