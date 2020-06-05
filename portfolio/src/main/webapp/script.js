@@ -21,15 +21,17 @@ window.onload = function() {
     var currentPageId = window.location.pathname.slice(1, -5);
     document.getElementById(currentPageId).style.textDecoration = "underline";
   })
-  displayComments();
 }
 
 
-async function displayComments() {
-  const response = await fetch('/data');
+async function displayComments(numComments) {
+  if (numComments == undefined) {
+    numComments = 5;
+  }
+  const response = await fetch('/data?numComments=5');
   const messageArr = await response.json();
 
   // Split messageArr into paragraph elements
-  var output = messageArr.map(str => "<p>" + str + "</p>");
+  var output = messageArr.map(str => "<p>" + str.message + "</p>");
   document.getElementById('comments-field').innerHTML = output.join("");
 }
