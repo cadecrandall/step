@@ -25,7 +25,8 @@ window.onload = function() {
 
 
 async function displayComments() {
-  const response = await fetch('/data?numComments=5');
+  var numComments = document.getElementById("num-comments-selector").value;
+  const response = await fetch('/data?numComments=' + numComments);
   const messageArr = await response.json();
   console.log(messageArr);
 

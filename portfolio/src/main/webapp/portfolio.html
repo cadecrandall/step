@@ -41,7 +41,16 @@
             <input type="submit">
           </form>
         </div>  
-        <button onclick="displayComments();">Load Comments</button>
+          <form action="javascript:displayComments()">
+            <label for="num-comments-selector">Select how many comments to view</label>
+            <select name="num-comments-selector" id="num-comments-selector">
+              <option id="5">5</option>
+              <option id="10">10</option>
+              <option id="15">15</option>
+              <option id="20">20</option>
+            </select>
+            <input type="submit" value="Submit">
+          </form>
         <div id="comments-field"></div> 
     </div>
     
