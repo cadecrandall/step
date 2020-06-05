@@ -3,8 +3,6 @@ package com.google.sps.data;
 import com.google.appengine.api.datastore.Entity;
 import javax.servlet.http.HttpServletRequest;
 
-
-
 /** Container to hold comment and metadata. */
 public class Comment {
 

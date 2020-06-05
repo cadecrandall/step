@@ -30,7 +30,6 @@ async function displayComments(numComments) {
   }
   const response = await fetch('/data?numComments=5');
   const messageArr = await response.json();
-  console.log(messageArr);
 
   // Split messageArr into paragraph elements
   var output = messageArr.map(str => "<p>" + str.message + "</p>");
