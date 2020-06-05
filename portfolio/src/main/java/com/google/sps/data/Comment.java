@@ -13,16 +13,16 @@ public class Comment {
   public final long timestamp;
   public final String message;
 
-  private static final String USERNAME_PROPERTY = "username";
-  private static final String SUBJECT_PROPERTY = "subject";
-  private static final String TIMESTAMP_PROPERTY = "timestamp";
-  private static final String MESSAGE_PROPERTY = "message";
+  public static final String USERNAME_PROPERTY = "username";
+  public static final String SUBJECT_PROPERTY = "subject";
+  public static final String TIMESTAMP_PROPERTY = "timestamp";
+  public static final String MESSAGE_PROPERTY = "message";
 
-  private static final String COMMENT_FORM_ID = "comment-message";
-  private static final String USERNAME_FORM_ID = "username";
-  private static final String SUBJECT_FORM_ID = "subject";
+  public static final String COMMENT_FORM_ID = "comment-message";
+  public static final String USERNAME_FORM_ID = "username";
+  public static final String SUBJECT_FORM_ID = "subject";
 
-  private static final String COMMENT_ENTITY = "Comment";
+  public static final String COMMENT_ENTITY = "Comment";
 
   public Comment(Entity entity) {
     this.username = (String) entity.getProperty(USERNAME_PROPERTY);
