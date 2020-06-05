@@ -84,20 +84,7 @@ public class DataServlet extends HttpServlet {
     return output;
   }
 
-
-  // TODO: return an object or ArrayList of all 3 fields from form
   private Entity parseForm(HttpServletRequest request) {
-    String name = request.getParameter(USERNAME_FORM_ID);
-    String subject = request.getParameter(SUBJECT_FORM_ID);
-    long timestamp = System.currentTimeMillis();
-    String message = request.getParameter(COMMENT_FORM_ID);
-
-    Entity commentEntity = new Entity(COMMENT_ENTITY);
-    commentEntity.setProperty(USERNAME_PROPERTY, name);
-    commentEntity.setProperty(SUBJECT_PROPERTY, subject);
-    commentEntity.setProperty(MESSAGE_PROPERTY, message);
-    commentEntity.setProperty(TIMESTAMP_PROPERTY, timestamp);
-
-    return commentEntity;
+    return new Comment(request).toEntity();
   }
 }
