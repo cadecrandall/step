@@ -35,11 +35,7 @@ public class DataServlet extends HttpServlet {
 
   private static final String CONTENT_TYPE = "text/html;";
   private static final String REDIRECT_LINK = "/portfolio.html";
-
-  private static final String COMMENT_FORM_ID = "comment-message";
-  private static final String USERNAME_FORM_ID = "username";
-  private static final String SUBJECT_FORM_ID = "subject";
-
+  
   private static final String USERNAME_PROPERTY = "username";
   private static final String SUBJECT_PROPERTY = "subject";
   private static final String TIMESTAMP_PROPERTY = "timestamp";
