@@ -20,11 +20,6 @@ public class DeleteComments extends HttpServlet {
   private static final String REDIRECT_LINK = "/portfolio.html";
 
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    
-  }
-
-  @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
