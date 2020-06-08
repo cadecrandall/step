@@ -35,7 +35,6 @@ public class DataServlet extends HttpServlet {
 
   private static final String CONTENT_TYPE = "text/html;";
   private static final String REDIRECT_LINK = "/portfolio.html";
-
   private static final String NUM_COMMENTS_PROPERTY = "numComments";
 
   @Override

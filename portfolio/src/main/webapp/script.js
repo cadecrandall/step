@@ -23,12 +23,10 @@ window.onload = function() {
   })
 }
 
-
 async function displayComments() {
   var numComments = document.getElementById("num-comments-selector").value;
   const response = await fetch('/data?numComments=' + numComments);
   const messageArr = await response.json();
-  console.log(messageArr);
 
   // Split messageArr into paragraph elements
   var output = messageArr.map(str => "<p>" + str.message + "</p>");
