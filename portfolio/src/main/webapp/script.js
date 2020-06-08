@@ -23,12 +23,9 @@ window.onload = function() {
   })
 }
 
-
-async function displayComments(numComments) {
-  if (numComments == undefined) {
-    numComments = 5;
-  }
-  const response = await fetch('/data?numComments=5');
+async function displayComments() {
+  var numComments = document.getElementById("num-comments-selector").value;
+  const response = await fetch('/data?numComments=' + numComments);
   const messageArr = await response.json();
 
   // Split messageArr into paragraph elements

@@ -35,18 +35,26 @@ public class DataServlet extends HttpServlet {
 
   private static final String CONTENT_TYPE = "text/html;";
   private static final String REDIRECT_LINK = "/portfolio.html";
+  private static final String NUM_COMMENTS_PROPERTY = "numComments";
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query(Comment.COMMENT_ENTITY).addSort(Comment.TIMESTAMP_PROPERTY, SortDirection.ASCENDING);
+    Query query = new Query(Comment.COMMENT_ENTITY).addSort(Comment.TIMESTAMP_PROPERTY, SortDirection.DESCENDING);
+
+    int numComments = Integer.parseInt(request.getParameter(NUM_COMMENTS_PROPERTY));
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
     ArrayList<Comment> comments = new ArrayList<>();
 
+    int counter = 0;
     for (Entity entity : results.asIterable()) {
+      if (counter == numComments) {
+        break;
+      }
       Comment currentComment = new Comment(entity);
       comments.add(currentComment);
+      counter++;
     }
 
     String json = convertToJson(comments);

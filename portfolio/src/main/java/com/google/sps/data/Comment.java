@@ -6,11 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 /** Container to hold comment and metadata. */
 public class Comment {
 
-  public final String username;
-  public final String subject;
-  public final long timestamp;
-  public final String message;
-
   public static final String USERNAME_PROPERTY = "username";
   public static final String SUBJECT_PROPERTY = "subject";
   public static final String TIMESTAMP_PROPERTY = "timestamp";
@@ -21,6 +16,11 @@ public class Comment {
   public static final String SUBJECT_FORM_ID = "subject";
 
   public static final String COMMENT_ENTITY = "Comment";
+  
+  public final String username;
+  public final String subject;
+  public final long timestamp;
+  public final String message;
 
   public Comment(Entity entity) {
     this.username = (String) entity.getProperty(USERNAME_PROPERTY);
