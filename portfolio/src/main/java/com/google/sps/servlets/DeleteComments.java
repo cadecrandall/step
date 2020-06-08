@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.sps.data.Comment;
 
+
+/** Delete all the comments from the server */
 @WebServlet("/delete-data") 
 public class DeleteComments extends HttpServlet {
   private static final String CONTENT_TYPE = "text/html;";
@@ -26,12 +28,8 @@ public class DeleteComments extends HttpServlet {
     Query query = new Query(Comment.COMMENT_ENTITY).addSort(Comment.TIMESTAMP_PROPERTY, SortDirection.DESCENDING);
     PreparedQuery results = datastore.prepare(query);
 
-    int counter = 0;
     for (Entity e : results.asIterable()) {
       datastore.delete(e.getKey());
-      if (counter == 4) {
-        break;
-      } counter++;
     }
     response.sendRedirect(REDIRECT_LINK);   
   }
