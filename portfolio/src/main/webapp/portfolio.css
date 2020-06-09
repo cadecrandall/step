@@ -26,3 +26,8 @@
   padding-bottom: 5px;
   margin: 0px;
 }
+
+#login {
+  font-size: 10px;
+  font-style: italic;
+}

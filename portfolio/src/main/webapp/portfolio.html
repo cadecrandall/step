@@ -29,9 +29,9 @@
         sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
       </p>
       <div class="comments">
-        <div id="login"></div>
         <h2>Comments</h2>
         <div id="compose-comment">
+          <div id="login"></div>
           <form autocomplete="on" action="/data" method="POST">
             <label for="username">Name</label><br>
             <input type="text" id="username" name="username"><br>
@@ -39,9 +39,10 @@
             <input type="text" id="subject" name="subject"><br>
             <label for="comment-message">Comment</label><br>
             <input type="text" id="comment-message" name="comment-message" size="90" style="height:100px;"><br>
-            <input type="submit">
+            <input type="submit" id="submit-comment">
           </form>
-        </div>  
+        </div>
+        <br />  
           <form action="javascript:displayComments()">
             <label for="num-comments-selector">Select how many comments to view</label>
             <select name="num-comments-selector" id="num-comments-selector">
