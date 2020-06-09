@@ -21,27 +21,28 @@ window.onload = function() {
     var currentPageId = window.location.pathname.slice(1, -5);
     document.getElementById(currentPageId).style.textDecoration = "underline";
   })
+  checkLogin();
 }
 
 async function checkLogin() {
   const response = await fetch('/login');
   const messageArr = await response.json();
-  return messageArr;
+
+  if (messageArr[0] == 'true') {
+    // TODO: display email address in message
+    document.getElementById('login').innerHTML = "<p>You're logged in as EMAILADDRESS. Logout <a href=\"" + messageArr[1] + "\">here</a>.</p>";
+  } else {
+    document.getElementById('login').innerHTML = "<p>Login <a href=\"" + messageArr[1] + "\">here</a> to share a comment.</p>";
+    document.getElementById('submit-comment').setAttribute("onsubmit", alert("you're not logged in!"));
+  }
 }
 
 async function displayComments() {
-  var checkLoginArr = await checkLogin();
-  if (checkLoginArr[0] == 'true') {
-    var numComments = document.getElementById("num-comments-selector").value;
-    const response = await fetch('/data?numComments=' + numComments);
-    const messageArr = await response.json();
-
-    // Split messageArr into paragraph elements
-    var output = messageArr.map(str => "<p>" + str.message + "</p>");
-    document.getElementById('comments-field').innerHTML = output.join("");
-    document.getElementById('login').innerHTML = "<p>Logout <a href=\"" + checkLoginArr[1] + "\">here</a>.</p>";
-  } else {
-    console.log("Oopsie you're logged out!");
-    document.getElementById('login').innerHTML = "<p>Login <a href=\"" + checkLoginArr[1] + "\">here</a>.</p>"
-  }
+  var numComments = document.getElementById("num-comments-selector").value;
+  const response = await fetch('/data?numComments=' + numComments);
+  const messageArr = await response.json();
+  
+  // Split messageArr into paragraph elements
+  var output = messageArr.map(str => "<p>" + str.message + "</p>");
+  document.getElementById('comments-field').innerHTML = output.join("");
 }
