@@ -33,5 +33,4 @@ public class DeleteComments extends HttpServlet {
     }
     response.sendRedirect(REDIRECT_LINK);   
   }
-
 }
