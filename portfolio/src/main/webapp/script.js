@@ -48,6 +48,6 @@ async function displayComments() {
   const messageArr = await response.json();
   
   // Split messageArr into paragraph elements
-  var output = messageArr.map(str => "<p>" + str.message + "</p>");
+  var output = messageArr.map(str => "<p>" + str.email + ": " + str.message + "</p>");
   document.getElementById('comments-field').innerHTML = output.join("");
 }
