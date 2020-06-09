@@ -22,6 +22,7 @@ window.onload = function() {
     document.getElementById(currentPageId).style.textDecoration = "underline";
   })
   checkLogin();
+  displayComments();
 }
 
 async function checkLogin() {
@@ -33,12 +34,16 @@ async function checkLogin() {
     document.getElementById('login').innerHTML = "<p>You're logged in as EMAILADDRESS. Logout <a href=\"" + messageArr[1] + "\">here</a>.</p>";
   } else {
     document.getElementById('login').innerHTML = "<p>Login <a href=\"" + messageArr[1] + "\">here</a> to share a comment.</p>";
-    document.getElementById('submit-comment').setAttribute("onsubmit", alert("you're not logged in!"));
+    document.getElementById('compose-comment-form').style.display = "none";
   }
 }
 
 async function displayComments() {
   var numComments = document.getElementById("num-comments-selector").value;
+  if (numComments == null) {
+    // show 5 comments by default
+    numComments = 5;
+  }
   const response = await fetch('/data?numComments=' + numComments);
   const messageArr = await response.json();
   
