@@ -25,6 +25,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import java.util.*;
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
@@ -64,13 +66,18 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Entity commentEntity = parseForm(request);
+    if (checkLogin()) {
+      Entity commentEntity = parseForm(request);
 
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.put(commentEntity);
+      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+      datastore.put(commentEntity);
 
-    // Return user to portfolio page after comment is posted
-    response.sendRedirect(REDIRECT_LINK);   
+      // Return user to portfolio page after comment is posted
+      response.sendRedirect(REDIRECT_LINK);  
+    } else {
+      // return that the comment post failed?
+      response.sendRedirect(REDIRECT_LINK);
+    }    
   }
 
 
@@ -82,5 +89,12 @@ public class DataServlet extends HttpServlet {
 
   private Entity parseForm(HttpServletRequest request) {
     return new Comment(request).toEntity();
+  }
+
+  /** Check login status before allowing comment to post */
+  public boolean checkLogin() {
+    UserService userService = UserServiceFactory.getUserService();
+    boolean isLoggedIn = userService.isUserLoggedIn();
+    return isLoggedIn;
   }
 }
