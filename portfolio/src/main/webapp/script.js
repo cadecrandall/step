@@ -38,9 +38,10 @@ async function displayComments() {
 
     // Split messageArr into paragraph elements
     var output = messageArr.map(str => "<p>" + str.message + "</p>");
-    document.getElementById('comments-field').innerHTML = output.join("") + "<p>Logout <a href=\"" + checkLoginArr[1] + "\">here</a>.</p>";
+    document.getElementById('comments-field').innerHTML = output.join("");
+    document.getElementById('login').innerHTML = "<p>Logout <a href=\"" + checkLoginArr[1] + "\">here</a>.</p>";
   } else {
     console.log("Oopsie you're logged out!");
-    document.getElementById('comments-field').innerHTML = "<p>Login <a href=\"" + checkLoginArr[1] + "\">here</a>.</p>"
+    document.getElementById('login').innerHTML = "<p>Login <a href=\"" + checkLoginArr[1] + "\">here</a>.</p>"
   }
 }
