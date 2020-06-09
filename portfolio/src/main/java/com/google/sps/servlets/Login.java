@@ -28,15 +28,15 @@ public class Login extends HttpServlet {
     response.setContentType(CONTENT_TYPE);
     PrintWriter out = response.getWriter();
     ArrayList<String> output = new ArrayList<>();
-
     UserService userService = UserServiceFactory.getUserService();
-    boolean isLoggedIn = userService.isUserLoggedIn();
-    if (isLoggedIn) {
-      String redirect = userService.createLogoutURL("/home");
+
+    
+    if (checkLogin(userService)) {
+      String redirect = userService.createLogoutURL(REDIRECT_LINK);
       output.add("true");
       output.add(redirect);
     } else {
-      String redirect = userService.createLoginURL("/home");
+      String redirect = userService.createLoginURL(REDIRECT_LINK);
       output.add("false");
       output.add(redirect);
     } 
@@ -52,5 +52,10 @@ public class Login extends HttpServlet {
     Gson jsonConverter = new Gson();
     String output = jsonConverter.toJson(val);
     return output;
+  }
+
+  private boolean checkLogin(UserService userServ) {
+    boolean isLoggedIn = userServ.isUserLoggedIn();
+    return isLoggedIn;
   }
 }
