@@ -66,8 +66,11 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    if (checkLogin()) {
+    UserService userService = UserServiceFactory.getUserService();
+    if (checkLogin(userService)) {
       Entity commentEntity = parseForm(request);
+      // add user email to the entity
+      commentEntity.setProperty(Comment.EMAIL_PROPERTY, userService.getCurrentUser().getEmail());
 
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
@@ -92,8 +95,7 @@ public class DataServlet extends HttpServlet {
   }
 
   /** Check login status before allowing comment to post */
-  public boolean checkLogin() {
-    UserService userService = UserServiceFactory.getUserService();
+  private boolean checkLogin(UserService userService) {
     boolean isLoggedIn = userService.isUserLoggedIn();
     return isLoggedIn;
   }
