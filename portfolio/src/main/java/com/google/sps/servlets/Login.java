@@ -27,19 +27,30 @@ public class Login extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType(CONTENT_TYPE);
     PrintWriter out = response.getWriter();
+    ArrayList<String> output = new ArrayList<>();
 
     UserService userService = UserServiceFactory.getUserService();
-    if (userService.isUserLoggedIn()) {
-      out.println("loggedin");
+    boolean isLoggedIn = userService.isUserLoggedIn();
+    if (isLoggedIn) {
+      String redirect = userService.createLogoutURL("/home");
+      output.add("true");
+      output.add(redirect);
     } else {
-      String urlToRedirectToAfterUserLogsIn = "/";
-      String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
-      out.println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
-    }
+      String redirect = userService.createLoginURL("/home");
+      output.add("false");
+      output.add(redirect);
+    } 
+    out.println(convertToJson(output));
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
+  }
+
+  private String convertToJson(ArrayList<String> val) {
+    Gson jsonConverter = new Gson();
+    String output = jsonConverter.toJson(val);
+    return output;
   }
 }

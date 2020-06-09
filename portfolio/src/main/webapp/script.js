@@ -23,12 +23,24 @@ window.onload = function() {
   })
 }
 
-async function displayComments() {
-  var numComments = document.getElementById("num-comments-selector").value;
-  const response = await fetch('/data?numComments=' + numComments);
+async function checkLogin() {
+  const response = await fetch('/login');
   const messageArr = await response.json();
+  return messageArr;
+}
 
-  // Split messageArr into paragraph elements
-  var output = messageArr.map(str => "<p>" + str.message + "</p>");
-  document.getElementById('comments-field').innerHTML = output.join("");
+async function displayComments() {
+  var checkLoginArr = await checkLogin();
+  if (checkLoginArr[0] == 'true') {
+    var numComments = document.getElementById("num-comments-selector").value;
+    const response = await fetch('/data?numComments=' + numComments);
+    const messageArr = await response.json();
+
+    // Split messageArr into paragraph elements
+    var output = messageArr.map(str => "<p>" + str.message + "</p>");
+    document.getElementById('comments-field').innerHTML = output.join("") + "<p>Logout <a href=\"" + checkLoginArr[1] + "\">here</a>.</p>";
+  } else {
+    console.log("Oopsie you're logged out!");
+    document.getElementById('comments-field').innerHTML = "<p>Login <a href=\"" + checkLoginArr[1] + "\">here</a>.</p>"
+  }
 }
