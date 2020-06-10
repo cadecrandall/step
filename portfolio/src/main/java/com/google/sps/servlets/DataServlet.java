@@ -67,8 +67,11 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     UserService userService = UserServiceFactory.getUserService();
+
+    // reject comments if user is not logged in
     if (CommentUtil.checkLogin(userService)) {
       Entity commentEntity = parseForm(request);
+
       // add user email to the entity
       commentEntity.setProperty(Comment.EMAIL_PROPERTY, userService.getCurrentUser().getEmail());
 
