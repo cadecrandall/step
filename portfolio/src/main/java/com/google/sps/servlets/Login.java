@@ -43,11 +43,6 @@ public class Login extends HttpServlet {
     out.println(convertToJson(output));
   }
 
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    
-  }
-
   private String convertToJson(ArrayList<String> val) {
     Gson jsonConverter = new Gson();
     String output = jsonConverter.toJson(val);

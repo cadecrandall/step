@@ -31,9 +31,11 @@ async function checkLogin() {
 
   if (messageArr[0] == 'true') {
     // TODO: display email address in message
-    document.getElementById('login').innerHTML = "<p>You're logged in as EMAILADDRESS. Logout <a href=\"" + messageArr[1] + "\">here</a>.</p>";
+    document.getElementById('login').innerHTML = "<p>You're logged in as EMAILADDRESS. Logout <a href=\""
+         + messageArr[1] + "\">here</a>.</p>";
   } else {
-    document.getElementById('login').innerHTML = "<p>Login <a href=\"" + messageArr[1] + "\">here</a> to share a comment.</p>";
+    document.getElementById('login').innerHTML = "<p>Login <a href=\"" + messageArr[1]
+         + "\">here</a> to share a comment.</p>";
     document.getElementById('compose-comment-form').style.display = "none";
   }
 }
@@ -46,7 +48,7 @@ async function displayComments() {
   }
   const response = await fetch('/data?numComments=' + numComments);
   const messageArr = await response.json();
-  
+
   // Split messageArr into paragraph elements
   var output = messageArr.map(str => "<p>" + str.email + ": " + str.message + "</p>");
   document.getElementById('comments-field').innerHTML = output.join("");
