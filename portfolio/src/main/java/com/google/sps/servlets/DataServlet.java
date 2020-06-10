@@ -28,8 +28,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import java.util.*;
-import com.google.gson.Gson;
 import com.google.sps.data.Comment;
+import com.google.sps.servlets.CommentUtil;
 
 
 @WebServlet("/data")
@@ -59,7 +59,7 @@ public class DataServlet extends HttpServlet {
       counter++;
     }
 
-    String json = convertToJson(comments);
+    String json = CommentUtil.convertToJson(comments);
     response.setContentType(CONTENT_TYPE);
     response.getWriter().println(json);
   }
@@ -67,7 +67,7 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     UserService userService = UserServiceFactory.getUserService();
-    if (checkLogin(userService)) {
+    if (CommentUtil.checkLogin(userService)) {
       Entity commentEntity = parseForm(request);
       // add user email to the entity
       commentEntity.setProperty(Comment.EMAIL_PROPERTY, userService.getCurrentUser().getEmail());
@@ -83,20 +83,7 @@ public class DataServlet extends HttpServlet {
     }    
   }
 
-
-  private String convertToJson(ArrayList<Comment> messageList) {
-    Gson jsonConverter = new Gson();
-    String output = jsonConverter.toJson(messageList);
-    return output;
-  }
-
   private Entity parseForm(HttpServletRequest request) {
     return new Comment(request).toEntity();
-  }
-
-  /** Check login status before allowing comment to post */
-  private boolean checkLogin(UserService userService) {
-    boolean isLoggedIn = userService.isUserLoggedIn();
-    return isLoggedIn;
   }
 }

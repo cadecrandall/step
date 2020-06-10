@@ -15,8 +15,9 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import java.io.PrintWriter;
 import java.util.*;
-import com.google.gson.Gson;
 import com.google.sps.data.Comment;
+import com.google.sps.servlets.CommentUtil;
+
 
 @WebServlet("/login") 
 public class Login extends HttpServlet {
@@ -31,7 +32,7 @@ public class Login extends HttpServlet {
     UserService userService = UserServiceFactory.getUserService();
 
     
-    if (checkLogin(userService)) {
+    if (CommentUtil.checkLogin(userService)) {
       String redirect = userService.createLogoutURL(REDIRECT_LINK);
       output.add("true");
       output.add(redirect);
@@ -40,17 +41,6 @@ public class Login extends HttpServlet {
       output.add("false");
       output.add(redirect);
     } 
-    out.println(convertToJson(output));
-  }
-
-  private String convertToJson(ArrayList<String> val) {
-    Gson jsonConverter = new Gson();
-    String output = jsonConverter.toJson(val);
-    return output;
-  }
-
-  private boolean checkLogin(UserService userServ) {
-    boolean isLoggedIn = userServ.isUserLoggedIn();
-    return isLoggedIn;
+    out.println(CommentUtil.convertToJson(output));
   }
 }
