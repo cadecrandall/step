@@ -37,6 +37,7 @@ async function checkLogin() {
     document.getElementById('login').innerHTML = "<p>Login <a href=\"" + messageArr[1]
          + "\">here</a> to share a comment.</p>";
     document.getElementById('compose-comment-form').style.display = "none";
+    document.getElementById('delete-comments').style.display = "none";
   }
 }
 
