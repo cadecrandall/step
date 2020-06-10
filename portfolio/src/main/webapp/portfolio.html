@@ -31,16 +31,18 @@
       <div class="comments">
         <h2>Comments</h2>
         <div id="compose-comment">
-          <form autocomplete="on" action="/data" method="POST">
+          <div id="login"></div>
+          <form autocomplete="on" action="/data" method="POST" id="compose-comment-form">
             <label for="username">Name</label><br>
             <input type="text" id="username" name="username"><br>
             <label for="subject">Subject</label><br>
             <input type="text" id="subject" name="subject"><br>
             <label for="comment-message">Comment</label><br>
             <input type="text" id="comment-message" name="comment-message" size="90" style="height:100px;"><br>
-            <input type="submit">
+            <input type="submit" id="submit-comment">
           </form>
-        </div>  
+        </div>
+        <br />  
           <form action="javascript:displayComments()">
             <label for="num-comments-selector">Select how many comments to view</label>
             <select name="num-comments-selector" id="num-comments-selector">

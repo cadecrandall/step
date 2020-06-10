@@ -10,6 +10,7 @@ public class Comment {
   public static final String SUBJECT_PROPERTY = "subject";
   public static final String TIMESTAMP_PROPERTY = "timestamp";
   public static final String MESSAGE_PROPERTY = "message";
+  public static final String EMAIL_PROPERTY = "email";
 
   public static final String COMMENT_FORM_ID = "comment-message";
   public static final String USERNAME_FORM_ID = "username";
@@ -21,12 +22,14 @@ public class Comment {
   public final String subject;
   public final long timestamp;
   public final String message;
+  public final String email;
 
   public Comment(Entity entity) {
     this.username = (String) entity.getProperty(USERNAME_PROPERTY);
     this.subject = (String) entity.getProperty(SUBJECT_PROPERTY);
     this.timestamp = (long) entity.getProperty(TIMESTAMP_PROPERTY);
     this.message = (String) entity.getProperty(MESSAGE_PROPERTY);
+    this.email = (String) entity.getProperty(EMAIL_PROPERTY);
   }
 
   public Comment(HttpServletRequest request) {
@@ -34,6 +37,8 @@ public class Comment {
     this.subject = request.getParameter(SUBJECT_FORM_ID);
     this.timestamp = System.currentTimeMillis();
     this.message = request.getParameter(COMMENT_FORM_ID);
+    // email is added to entity in DataServlet.java
+    this.email = "";
   }
 
   /** Return an Entity for DataStore */
@@ -43,6 +48,7 @@ public class Comment {
     commentEntity.setProperty(SUBJECT_PROPERTY, this.subject);
     commentEntity.setProperty(MESSAGE_PROPERTY, this.message);
     commentEntity.setProperty(TIMESTAMP_PROPERTY, this.timestamp);
+    commentEntity.setProperty(EMAIL_PROPERTY, this.email);
     return commentEntity;
   }
 }

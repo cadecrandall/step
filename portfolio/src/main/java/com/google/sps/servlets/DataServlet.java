@@ -25,9 +25,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import java.util.*;
-import com.google.gson.Gson;
 import com.google.sps.data.Comment;
+import com.google.sps.data.CommentUtil;
 
 
 @WebServlet("/data")
@@ -57,27 +59,28 @@ public class DataServlet extends HttpServlet {
       counter++;
     }
 
-    String json = convertToJson(comments);
+    String json = CommentUtil.convertToJson(comments);
     response.setContentType(CONTENT_TYPE);
     response.getWriter().println(json);
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Entity commentEntity = parseForm(request);
+    UserService userService = UserServiceFactory.getUserService();
+    if (CommentUtil.checkLogin(userService)) {
+      Entity commentEntity = parseForm(request);
+      // add user email to the entity
+      commentEntity.setProperty(Comment.EMAIL_PROPERTY, userService.getCurrentUser().getEmail());
 
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.put(commentEntity);
+      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+      datastore.put(commentEntity);
 
-    // Return user to portfolio page after comment is posted
-    response.sendRedirect(REDIRECT_LINK);   
-  }
-
-
-  private String convertToJson(ArrayList<Comment> messageList) {
-    Gson jsonConverter = new Gson();
-    String output = jsonConverter.toJson(messageList);
-    return output;
+      // Return user to portfolio page after comment is posted
+      response.sendRedirect(REDIRECT_LINK);  
+    } else {
+      // return that the comment post failed?
+      response.sendRedirect(REDIRECT_LINK);
+    }    
   }
 
   private Entity parseForm(HttpServletRequest request) {
