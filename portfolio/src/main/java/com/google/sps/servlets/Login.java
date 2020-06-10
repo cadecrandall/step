@@ -16,7 +16,8 @@ import com.google.appengine.api.users.UserServiceFactory;
 import java.io.PrintWriter;
 import java.util.*;
 import com.google.sps.data.Comment;
-import com.google.sps.servlets.CommentUtil;
+import com.google.sps.data.CommentUtil;
+
 
 
 @WebServlet("/login") 

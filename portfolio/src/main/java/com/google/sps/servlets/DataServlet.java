@@ -29,7 +29,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import java.util.*;
 import com.google.sps.data.Comment;
-import com.google.sps.servlets.CommentUtil;
+import com.google.sps.data.CommentUtil;
 
 
 @WebServlet("/data")

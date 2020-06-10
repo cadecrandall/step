@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.sps.data.Comment;
-import com.google.sps.servlets.CommentUtil;
+import com.google.sps.data.CommentUtil;
+
 
 
 /** Delete all the comments from the server */
