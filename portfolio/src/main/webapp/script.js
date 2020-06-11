@@ -23,6 +23,7 @@ window.onload = function() {
   })
   checkLogin();
   displayComments();
+  fetchBlobstoreURL();
 }
 
 async function checkLogin() {
@@ -58,8 +59,6 @@ async function displayComments() {
 }
 
 /** Grab the BlobStore URL for image upload and change the onsubmit action */
-// TODO: i think this is the problem  
-// (RESOLVED): Why does this function have to be called with body onload?
 function fetchBlobstoreURL() {
   fetch('/blobstore-upload-URL')
       .then((response) => response.text())
