@@ -39,6 +39,17 @@ public class DataServlet extends HttpServlet {
   private static final String REDIRECT_LINK = "/portfolio.html";
   private static final String NUM_COMMENTS_PROPERTY = "numComments";
 
+
+  /**
+  * Sends a JSON array of Comment objects as the HttpServletResponse 
+  * @return
+  * email: "test@example.com"
+  * imageURL: "/_ah/img/CgUa3BsuqZ0UAS1DAfTY_Q"
+  * message: "Message Content"
+  * subject: "Subject Content"
+  * timestamp: 1591827404913 (ms)
+  * username: "Cade"
+  */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query(Comment.COMMENT_ENTITY).addSort(Comment.TIMESTAMP_PROPERTY, SortDirection.DESCENDING);
@@ -74,7 +85,6 @@ public class DataServlet extends HttpServlet {
 
       // add user email to the entity
       commentEntity.setProperty(Comment.EMAIL_PROPERTY, userService.getCurrentUser().getEmail());
-
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
 
