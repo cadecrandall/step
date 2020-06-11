@@ -49,10 +49,11 @@ async function displayComments() {
   }
   const response = await fetch('/data?numComments=' + numComments);
   const messageArr = await response.json();
+  console.log(messageArr);
 
   // Split messageArr into paragraph elements
   var output = messageArr.map(str => "<p>" + str.email + ": " + str.message + "</p>"
-      + "<img src=\"" + str.image + "\">");
+      + "<img src=\"" + str.imageURL + "\">");
   document.getElementById('comments-field').innerHTML = output.join("");
 }
 
@@ -60,7 +61,6 @@ async function displayComments() {
 // TODO: i think this is the problem  
 // (RESOLVED): Why does this function have to be called with body onload?
 function fetchBlobstoreURL() {
-  console.log("HELP");
   fetch('/blobstore-upload-URL')
       .then((response) => response.text())
       .then((imageUploadURL) => {
