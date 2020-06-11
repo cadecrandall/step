@@ -10,7 +10,7 @@
   width: 100%;
 }
 
-.card {
+.project {
   background-color: white;
   font-family: 'Roboto', 'Times New Roman', Times, serif;
   padding: 10px;
@@ -32,7 +32,7 @@
   font-style: italic;
 }
 
-.required {
+.comments form {
   font-weight: bold;
 }
 

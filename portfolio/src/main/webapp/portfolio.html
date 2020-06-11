@@ -9,58 +9,58 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="script.js"></script>
+	<script src="portfolio.js"></script>
 </head>
 
 <body>
 	<div class="sidebar"></div>
   <div id="greeting"></div>
 	<div id="content">
-		<div class="card">
+		<div class="project">
 			<h1>Title of Project</h1>
 			<div class="banner-img-crop">
 				<img src="images/trees.jpg" id="banner-pic" style="margin-top:-60%">
       </div>
-      <p>
+      <p> 
         Details about project go here. Something about Lorem ipsum dolor sit amet, consectetur adipiscing
         elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
         dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
         sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
       </p>
-      <div class="comments">
-        <h3>Write a comment</h3>
-        <div id="compose-comment">
-          <div id="login"></div>
-          <form autocomplete="on" method="POST" id="compose-comment-form" enctype="multipart/form-data">
-            <label class="required"for="username">Name</label><br>
-            <input type="text" id="username" name="username" required><br>
-            <label class="required" for="subject">Subject</label><br>
-            <input type="text" id="subject" name="subject" required><br>
-            <label class="required" for="comment-message">Comment</label><br>
-            <input type="text" id="comment-message" name="comment-message" size="90" style="height:100px;" required><br>
-            <label for="image">Upload image</label><br>
-            <input type="file" name="image" id="image"><br><br>
-            <input type="submit" id="submit-comment" value="Submit comment!">
-          </form>
-        </div>
-        <h2>Comments</h2>
-        <br /> 
-          <form action="javascript:displayComments()">
-            <label for="num-comments-selector">Select how many comments to view</label>
-            <select name="num-comments-selector" id="num-comments-selector">
-              <option id="5">5</option>
-              <option id="10">10</option>
-              <option id="15">15</option>
-              <option id="20">20</option>
-            </select>
-            <input type="submit" value="Submit">
-          </form>
-        <div id="comments-field"></div> 
-        <form action="/delete-data" method="POST">
-          <input type="submit" value="Delete Comments!" id="delete-comments" onclick="/delete-data"></input>
+	  </div>
+    <div class="comments">
+      <h3>Write a comment</h3>
+      <div id="compose-comment">
+        <div id="login"></div>
+        <form autocomplete="on" method="POST" id="compose-comment-form" enctype="multipart/form-data">
+          <label class="required"for="username">Nickname</label><br>
+          <input type="text" id="username" name="username" required><br>
+          <label class="required" for="comment-message">Comment</label><br>
+          <input type="text" id="comment-message" name="comment-message" size="90" style="height:100px;" required><br>
+          <label for="image">Upload image</label>
+          <input type="file" name="image" id="image"><br><br>
+          <input type="submit" id="submit-comment" value="Submit comment!">
         </form>
-    </div> 
+      </div>
+      <h2>Comments</h2> 
+      <br /> 
+      <div id="comments-field"></div>
+      <form action="javascript:displayComments()">
+        <label for="num-comments-selector">Select how many comments to view</label>
+        <select name="num-comments-selector" id="num-comments-selector">
+          <option id="5">5</option>
+          <option id="10">10</option>
+          <option id="15">15</option>
+          <option id="20">20</option>
+        </select>
+        <input type="submit" value="Submit">
+      </form>
+      <form action="/delete-data" method="POST">
+        <input type="submit" value="Delete Comments!" id="delete-comments" onclick="/delete-data"></input>
+      </form>
+    </div>
+    
     
 </body>
 </html>    
