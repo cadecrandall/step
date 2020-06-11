@@ -51,9 +51,20 @@ async function displayComments() {
   const response = await fetch('/data?numComments=' + numComments);
   const messageArr = await response.json();
 
+  var output = [];
+
+  messageArr.forEach(function(comment) {
+    var date = new Date(parseInt(comment.timestamp)).toDateString();
+    var container = `<div class='comment'>
+    <h1>${comment.subject}</h1>
+    <h2>${comment.username}</h2>
+    <h3>Posted on ${date}</h3>
+    <p>${comment.message}</p>`;
+    output.push(container);
+  });
   // Split messageArr into paragraph elements
-  var output = messageArr.map(str => "<p>" + str.email + ": " + str.message + "</p>"
-      + "<img src=\"" + str.imageURL + "\">");
+  // var output = messageArr.map(str => "<p>" + str.email + ": " + str.message + "</p>"
+  //     + "<img src=\"" + str.imageURL + "\">");
   document.getElementById('comments-field').innerHTML = output.join("");
 }
 
