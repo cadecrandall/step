@@ -31,3 +31,13 @@
   font-size: 10px;
   font-style: italic;
 }
+
+.required {
+  font-weight: bold;
+}
+
+.required:after {
+    color: #a6350c;
+    content: '*';
+    display:inline;
+}

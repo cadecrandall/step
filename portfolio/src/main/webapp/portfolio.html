@@ -29,23 +29,23 @@
         sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
       </p>
       <div class="comments">
-        <h2>Comments</h2>
+        <h3>Write a comment</h3>
         <div id="compose-comment">
           <div id="login"></div>
           <form autocomplete="on" method="POST" id="compose-comment-form" enctype="multipart/form-data">
-            <label for="username">Name</label><br>
-            <input type="text" id="username" name="username"><br>
-            <label for="subject">Subject</label><br>
-            <input type="text" id="subject" name="subject"><br>
-            <label for="comment-message">Comment</label><br>
-            <input type="text" id="comment-message" name="comment-message" size="90" style="height:100px;"><br>
+            <label class="required"for="username">Name</label><br>
+            <input type="text" id="username" name="username" required><br>
+            <label class="required" for="subject">Subject</label><br>
+            <input type="text" id="subject" name="subject" required><br>
+            <label class="required" for="comment-message">Comment</label><br>
+            <input type="text" id="comment-message" name="comment-message" size="90" style="height:100px;" required><br>
             <label for="image">Upload image</label><br>
-            <input type="file" name="image" id="image"><br>
+            <input type="file" name="image" id="image"><br><br>
             <input type="submit" id="submit-comment" value="Submit comment!">
           </form>
         </div>
-
-        <br />  
+        <h2>Comments</h2>
+        <br /> 
           <form action="javascript:displayComments()">
             <label for="num-comments-selector">Select how many comments to view</label>
             <select name="num-comments-selector" id="num-comments-selector">
@@ -60,7 +60,7 @@
         <form action="/delete-data" method="POST">
           <input type="submit" value="Delete Comments!" id="delete-comments" onclick="/delete-data"></input>
         </form>
-    </div>
+    </div> 
     
 </body>
-</html>   
+</html>    
