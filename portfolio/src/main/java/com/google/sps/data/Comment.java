@@ -56,7 +56,7 @@ public class Comment {
     this.message = request.getParameter(COMMENT_FORM_ID);
     this.imageURL = getUploadedFileUrl(request, IMAGE_FORM_ID);
 
-    // email is added to entity in DataServlet.java
+    // Email is added to entity in DataServlet.java
     this.email = "";
   }
 
@@ -81,7 +81,7 @@ public class Comment {
       return null;
     }
 
-    // form contains only one file input located at index 0
+    // Form contains only one file input located at index 0
     BlobKey blobKey = blobKeys.get(0);
 
     // User submitted form without selecting a file, so we can't get a URL. (live server)

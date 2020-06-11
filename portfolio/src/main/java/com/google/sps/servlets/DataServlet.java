@@ -41,8 +41,7 @@ public class DataServlet extends HttpServlet {
 
 
   /**
-  * Sends a JSON array of Comment objects as the HttpServletResponse 
-  * @return
+  * Writes a JSON array of Comment objects as the HttpServletResponse with following keys and example values
   * email: "test@example.com"
   * imageURL: "/_ah/img/CgUa3BsuqZ0UAS1DAfTY_Q"
   * message: "Message Content"
@@ -79,7 +78,7 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     UserService userService = UserServiceFactory.getUserService();
 
-    // reject comments if user is not logged in
+    // Rejects comments if user is not logged in
     if (CommentUtil.checkLogin(userService)) {
       Entity commentEntity = parseForm(request);
 
