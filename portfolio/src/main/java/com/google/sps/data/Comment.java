@@ -19,7 +19,6 @@ import java.util.Map;
 public class Comment {
 
   public static final String USERNAME_PROPERTY = "username";
-  public static final String SUBJECT_PROPERTY = "subject";
   public static final String TIMESTAMP_PROPERTY = "timestamp";
   public static final String MESSAGE_PROPERTY = "message";
   public static final String EMAIL_PROPERTY = "email";
@@ -27,14 +26,12 @@ public class Comment {
 
   public static final String COMMENT_FORM_ID = "comment-message";
   public static final String USERNAME_FORM_ID = "username";
-  public static final String SUBJECT_FORM_ID = "subject";
   public static final String IMAGE_FORM_ID = "image";
 
 
   public static final String COMMENT_ENTITY = "Comment";
   
   public final String username;
-  public final String subject;
   public final long timestamp;
   public final String message;
   public final String email;
@@ -42,7 +39,6 @@ public class Comment {
 
   public Comment(Entity entity) {
     this.username = (String) entity.getProperty(USERNAME_PROPERTY);
-    this.subject = (String) entity.getProperty(SUBJECT_PROPERTY);
     this.timestamp = (long) entity.getProperty(TIMESTAMP_PROPERTY);
     this.message = (String) entity.getProperty(MESSAGE_PROPERTY);
     this.email = (String) entity.getProperty(EMAIL_PROPERTY);
@@ -51,7 +47,6 @@ public class Comment {
 
   public Comment(HttpServletRequest request) {
     this.username = request.getParameter(USERNAME_FORM_ID);
-    this.subject = request.getParameter(SUBJECT_FORM_ID);
     this.timestamp = System.currentTimeMillis();
     this.message = request.getParameter(COMMENT_FORM_ID);
     this.imageURL = getUploadedFileUrl(request, IMAGE_FORM_ID);
@@ -64,7 +59,6 @@ public class Comment {
   public Entity toEntity() {
     Entity commentEntity = new Entity(COMMENT_ENTITY);
     commentEntity.setProperty(USERNAME_PROPERTY, this.username);
-    commentEntity.setProperty(SUBJECT_PROPERTY, this.subject);
     commentEntity.setProperty(MESSAGE_PROPERTY, this.message);
     commentEntity.setProperty(TIMESTAMP_PROPERTY, this.timestamp);
     commentEntity.setProperty(EMAIL_PROPERTY, this.email);

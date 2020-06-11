@@ -45,7 +45,6 @@ public class DataServlet extends HttpServlet {
   * email: "test@example.com"
   * imageURL: "/_ah/img/CgUa3BsuqZ0UAS1DAfTY_Q"
   * message: "Message Content"
-  * subject: "Subject Content"
   * timestamp: 1591827404913 (ms)
   * username: "Cade"
   */
