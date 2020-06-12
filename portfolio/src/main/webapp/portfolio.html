@@ -30,8 +30,8 @@
       </p>
 	  </div>
     <div class="comments">
-      <h3>Write a comment</h3>
       <div id="compose-comment">
+        <h2 style="margin-top: 0">Write a comment</h2>
         <div id="login"></div>
         <form autocomplete="on" method="POST" id="compose-comment-form" enctype="multipart/form-data">
           <label class="required"for="username">Nickname</label><br>
@@ -39,11 +39,11 @@
           <label class="required" for="comment-message">Comment</label><br>
           <input type="text" id="comment-message" name="comment-message" size="90" style="height:100px;" required><br>
           <label for="image">Upload image</label>
-          <input type="file" name="image" id="image"><br><br>
-          <input type="submit" id="submit-comment" value="Submit comment!">
+          <input type="file" name="image" id="image" class="button"><br><br>
+          <input type="submit" id="submit-comment" value="Submit comment!" class="button">
         </form>
       </div>
-      <h2>Comments</h2>
+      <h2>Comments</h2> 
       <div id="comments-field"></div>
       <form action="javascript:displayComments()">
         <label for="num-comments-selector">Select how many comments to view</label>
@@ -53,10 +53,10 @@
           <option id="15">15</option>
           <option id="20">20</option>
         </select>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" class="button">
       </form>
       <form action="/delete-data" method="POST">
-        <input type="submit" value="Delete Comments!" id="delete-comments" onclick="/delete-data"></input>
+        <input type="submit" value="Delete Comments!" id="delete-comments" onclick="/delete-data" class="button"></input>
       </form>
     </div>
     

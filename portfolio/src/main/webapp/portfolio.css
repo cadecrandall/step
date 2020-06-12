@@ -53,6 +53,16 @@
   margin-right: 0;
 }
 
+#compose-comment {
+  background-color: white;
+  font-family: 'Roboto', 'Times New Roman', Times, serif;
+  padding: 10px;
+  padding-bottom: 5px;
+  margin: 10px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .comment-img-crop {
   width: inherit;
   height: 100px;
@@ -72,4 +82,12 @@
 
 .date {
   font-style: italic;
+}
+
+.button {
+  
+}
+
+.button:hover {
+
 }
