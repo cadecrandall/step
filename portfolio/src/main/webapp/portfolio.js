@@ -32,8 +32,8 @@ async function checkLogin() {
 
   if (messageArr[0] == 'true') {
     // TODO: display email address in message
-    document.getElementById('login').innerHTML = "<p>You're logged in as EMAILADDRESS. Logout <a href=\""
-         + messageArr[1] + "\">here</a>.</p>";
+    document.getElementById('login').innerHTML = "<p>You're logged in as " 
+         + messageArr[2] + ". Logout <a href=\"" + messageArr[1] + "\">here</a>.</p>";
   } else {
     document.getElementById('login').innerHTML = "<p>Login <a href=\"" + messageArr[1]
          + "\">here</a> to share a comment.</p>";
