@@ -20,11 +20,12 @@
   margin-right: 0;
 }
 
-.card h1 {
+.project h1 {
   font-family: 'Roboto Slab', Arial, Helvetica, sans-serif;
   padding: 0px;
   padding-bottom: 5px;
   margin: 0px;
+  font-weight: bold;
 }
 
 #login {
@@ -37,7 +38,24 @@
 }
 
 .required:after {
-    color: #a6350c;
-    content: '*';
-    display:inline;
+  color: #a6350c;
+  content: '*';
+  display:inline;
+}
+
+.comment {
+  background-color: white;
+  font-family: 'Roboto', 'Times New Roman', Times, serif;
+  padding: 10px;
+  padding-bottom: 5px;
+  margin: 10px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.comment-img-crop {
+  width: inherit;
+  height: 100px;
+  overflow: hidden;
+  padding-top: -5px;
 }
