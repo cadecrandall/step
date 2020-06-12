@@ -59,3 +59,17 @@
   overflow: hidden;
   padding-top: -5px;
 }
+
+.comment-img-crop:hover {
+  overflow: visible;
+  height: 100%;
+}
+
+.username {
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.date {
+  font-style: italic;
+}

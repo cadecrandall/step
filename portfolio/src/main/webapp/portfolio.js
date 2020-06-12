@@ -56,8 +56,8 @@ async function displayComments() {
   messageArr.forEach(function(comment) {
     var date = new Date(parseInt(comment.timestamp)).toDateString();
     var container = `<div class='comment'>
-    <div id="name">${comment.username}</div>
-    <div id="date">Posted on ${date}</div>
+    <div class="username">${comment.username}</div>
+    <div class="date">Posted on ${date}</div>
     <p>${comment.message}</p>`;
     if (comment.imageURL != null) {
       container += `<div class="comment-img-crop"><img src="${comment.imageURL}"></div>`;
