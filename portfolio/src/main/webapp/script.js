@@ -23,6 +23,7 @@ window.onload = function() {
   })
   checkLogin();
   displayComments();
+  fetchBlobstoreURL();
 }
 
 async function checkLogin() {
@@ -51,6 +52,18 @@ async function displayComments() {
   const messageArr = await response.json();
 
   // Split messageArr into paragraph elements
-  var output = messageArr.map(str => "<p>" + str.email + ": " + str.message + "</p>");
+  var output = messageArr.map(str => "<p>" + str.email + ": " + str.message + "</p>"
+      + "<img src=\"" + str.imageURL + "\">");
   document.getElementById('comments-field').innerHTML = output.join("");
+}
+
+/** Grab the BlobStore URL for image upload and change the onsubmit action */
+function fetchBlobstoreURL() {
+  fetch('/blobstore-upload-URL')
+      .then((response) => response.text())
+      .then((imageUploadURL) => {
+        const form = document.getElementById('compose-comment-form');
+        form.action = imageUploadURL;
+        
+      });
 }
