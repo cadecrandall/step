@@ -19,12 +19,6 @@ import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
 
-// general alg:
-// find events that attendees are marked as attending now
-// order by start time
-// go to the end of the earliest event and check conflicts
-// if no conflicts, mark time until the next conflict
-
 
 public final class FindMeetingQuery {
   // @param events: all of the events that exist so far 
@@ -36,7 +30,7 @@ public final class FindMeetingQuery {
     Collections.sort(attendeeConflictTimes, TimeRange.ORDER_BY_START);
     ArrayList<TimeRange> possibleTimes = findPossibleTimes(attendeeConflictTimes, request.getDuration());
 
-    throw new UnsupportedOperationException("TODO: Implement this method.");
+    return possibleTimes;
   }
 
   // return only the TimeRanges that our attendees are going to to find potential conflicts
@@ -60,18 +54,20 @@ public final class FindMeetingQuery {
     for (TimeRange currentTime : existingTimes) {
       // if the difference between this start and the last end is long enough, add to list of times
       if ((currentTime.start() - previousTime) >= duration) {
-        possibleTimes.add(TimeRange.fromStartEnd(previousTime, currentTime.start(), true));
-      }
-      previousTime = currentTime.end();
+        possibleTimes.add(TimeRange.fromStartEnd(previousTime, currentTime.start(), false));
+      } 
+
+      // Handle event overlap:
+      // Move the previousTime forward only when the current event ending is later in the day
+      if (currentTime.end() > previousTime) {
+        previousTime = currentTime.end();
+      } 
+    }
+    
+    // add meeting time from the end of the last existing meeting to the end of day
+    if (TimeRange.END_OF_DAY - previousTime > duration) {
+      possibleTimes.add(TimeRange.fromStartEnd(previousTime, TimeRange.END_OF_DAY, true));
     }
     return possibleTimes;
   }
-
-  private Collection<TimeRange> removeConflicts(Collection<Event> events) {
-    Collection<TimeRange> output = new ArrayList<>();
-    return output;
-  }
-
-  // overlay time blocks and find gaps?
-  // check to see which of these gaps fits our duration
 }
