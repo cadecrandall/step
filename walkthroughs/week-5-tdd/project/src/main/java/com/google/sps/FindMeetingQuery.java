@@ -32,9 +32,9 @@ public final class FindMeetingQuery {
   // @param request: MeetingRequest containing event name, duration, and attendees
 
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    ArrayList<TimeRange> overlapEvents = findAttendeeEvents(events, request.getAttendees());
-    Collections.sort(overlapEvents, TimeRange.ORDER_BY_START);
-
+    ArrayList<TimeRange> attendeeConflictTimes = findAttendeeEvents(events, request.getAttendees());
+    Collections.sort(attendeeConflictTimes, TimeRange.ORDER_BY_START);
+    ArrayList<TimeRange> possibleTimes = findPossibleTimes(attendeeConflictTimes, request.getDuration());
 
     throw new UnsupportedOperationException("TODO: Implement this method.");
   }
@@ -51,6 +51,20 @@ public final class FindMeetingQuery {
       }
     }
     return output;
+  }
+
+  private ArrayList<TimeRange> findPossibleTimes(ArrayList<TimeRange> existingTimes, long duration) {
+    int previousTime = TimeRange.START_OF_DAY;
+    ArrayList<TimeRange> possibleTimes = new ArrayList<>();
+
+    for (TimeRange currentTime : existingTimes) {
+      // if the difference between this start and the last end is long enough, add to list of times
+      if ((currentTime.start() - previousTime) >= duration) {
+        possibleTimes.add(TimeRange.fromStartEnd(previousTime, currentTime.start(), true));
+      }
+      previousTime = currentTime.end();
+    }
+    return possibleTimes;
   }
 
   private Collection<TimeRange> removeConflicts(Collection<Event> events) {
