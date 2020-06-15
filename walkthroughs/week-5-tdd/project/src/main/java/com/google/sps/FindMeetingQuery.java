@@ -15,7 +15,16 @@
 package com.google.sps;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.ArrayList;
+import java.util.List;
+
+// general alg:
+// find events that attendees are marked as attending now
+// order by start time
+// go to the end of the earliest event and check conflicts
+// if no conflicts, mark time until the next conflict
+
 
 public final class FindMeetingQuery {
   // @param events: all of the events that exist so far 
@@ -23,21 +32,29 @@ public final class FindMeetingQuery {
   // @param request: MeetingRequest containing event name, duration, and attendees
 
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    Collection<Event> overlapEvents = findAttendeeEvents(events, request.getAttendees());
+    ArrayList<TimeRange> overlapEvents = findAttendeeEvents(events, request.getAttendees());
+    Collections.sort(overlapEvents, TimeRange.ORDER_BY_START);
+
+
     throw new UnsupportedOperationException("TODO: Implement this method.");
   }
 
-  // return only the events that our attendees are going to
-  private Collection<Event> findAttendeeEvents(Collection<Event> events, Collection<String> attendees) {
-    Collection<Event> output = new ArrayList<>();
+  // return only the TimeRanges that our attendees are going to to find potential conflicts
+  private ArrayList<TimeRange> findAttendeeEvents(Collection<Event> events, Collection<String> attendees) {
+    ArrayList<TimeRange> output = new ArrayList<>();
     for (Event e : events) {
       for (String a : attendees) {
         if (e.getAttendees().contains(a)) {
-          output.add(e);
+          output.add(e.getWhen());
           break;
         }
       }
     }
+    return output;
+  }
+
+  private Collection<TimeRange> removeConflicts(Collection<Event> events) {
+    Collection<TimeRange> output = new ArrayList<>();
     return output;
   }
 
