@@ -15,9 +15,32 @@
 package com.google.sps;
 
 import java.util.Collection;
+import java.util.ArrayList;
 
 public final class FindMeetingQuery {
+  // @param events: all of the events that exist so far 
+  //                each event contains name, time range, and attendees
+  // @param request: MeetingRequest containing event name, duration, and attendees
+
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
+    Collection<Event> overlapEvents = findAttendeeEvents(events, request.getAttendees());
     throw new UnsupportedOperationException("TODO: Implement this method.");
   }
+
+  // return only the events that our attendees are going to
+  private Collection<Event> findAttendeeEvents(Collection<Event> events, Collection<String> attendees) {
+    Collection<Event> output = new ArrayList<>();
+    for (Event e : events) {
+      for (String a : attendees) {
+        if (e.getAttendees().contains(a)) {
+          output.add(e);
+          break;
+        }
+      }
+    }
+    return output;
+  }
+
+  // overlay time blocks and find gaps?
+  // check to see which of these gaps fits our duration
 }
