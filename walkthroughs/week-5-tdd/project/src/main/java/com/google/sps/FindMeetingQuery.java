@@ -19,18 +19,35 @@ import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
 
+// figure out what everything is 
+// findAttendeeEvents() for conflicts
+// sorted by the start time
+// searched for conflicts
+
 
 public final class FindMeetingQuery {
   // @param events: all of the events that exist so far 
   //                each event contains name, time range, and attendees
   // @param request: MeetingRequest containing event name, duration, and attendees
-
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    ArrayList<TimeRange> attendeeConflictTimes = findAttendeeEvents(events, request.getAttendees());
-    Collections.sort(attendeeConflictTimes, TimeRange.ORDER_BY_START);
-    ArrayList<TimeRange> possibleTimes = findPossibleTimes(attendeeConflictTimes, request.getDuration());
+    ArrayList<TimeRange> requiredEvents = findAttendeeEvents(events, request.getAttendees());
+    ArrayList<TimeRange> optionalEvents = findAttendeeEvents(events, request.getOptionalAttendees());
 
-    return possibleTimes;
+    // Create an ArrayList of the two event types combined
+    ArrayList<TimeRange> optionalAndRequiredEvents = new ArrayList<>();
+    optionalAndRequiredEvents.addAll(requiredEvents);
+    optionalAndRequiredEvents.addAll(optionalEvents); 
+
+    Collections.sort(requiredEvents, TimeRange.ORDER_BY_START);
+    Collections.sort(optionalEvents, TimeRange.ORDER_BY_START);
+    Collections.sort(optionalAndRequiredEvents, TimeRange.ORDER_BY_START);
+
+    ArrayList<TimeRange> possibleTimes = findPossibleTimes(optionalAndRequiredEvents, request.getDuration());
+    if (possibleTimes.size() != 0) {
+      return possibleTimes;
+    } else {
+      return findPossibleTimes(requiredEvents, request.getDuration());
+    }
   }
 
   // return only the TimeRanges that our attendees are going to to find potential conflicts
