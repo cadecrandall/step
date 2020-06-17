@@ -18,14 +18,11 @@ import java.util.*;
 import com.google.sps.data.Comment;
 import com.google.sps.data.CommentUtil;
 
-
-
 @WebServlet("/login") 
 public class Login extends HttpServlet {
   private static final String CONTENT_TYPE = "text/html;";
   private static final String REDIRECT_LINK = "/portfolio.html";
   
-
   /**
   * Writes an array containing elements:
   * 0.  string containing "true" or "false" if user is logged in
@@ -40,7 +37,6 @@ public class Login extends HttpServlet {
     ArrayList<String> output = new ArrayList<>();
     UserService userService = UserServiceFactory.getUserService();
 
-    
     if (CommentUtil.checkLogin(userService)) {
       String redirect = userService.createLogoutURL(REDIRECT_LINK);
       output.add("true");

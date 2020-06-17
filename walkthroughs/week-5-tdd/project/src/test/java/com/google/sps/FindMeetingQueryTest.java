@@ -132,8 +132,8 @@ public final class FindMeetingQueryTest {
             Arrays.asList(PERSON_A)),
         new Event("Event 2", TimeRange.fromStartDuration(TIME_0900AM, DURATION_30_MINUTES),
             Arrays.asList(PERSON_B)),
-        new Event("Event 3", TimeRange.fromStartEnd(TimeRange.START_OF_DAY,TimeRange.END_OF_DAY, true),
-            Arrays.asList(PERSON_C)));
+        new Event("Event 3", TimeRange.fromStartEnd(
+            TimeRange.START_OF_DAY,TimeRange.END_OF_DAY, true), Arrays.asList(PERSON_C)));
     
     MeetingRequest request = 
         new MeetingRequest(Arrays.asList(PERSON_A, PERSON_B), DURATION_30_MINUTES);
@@ -151,8 +151,8 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void optionalPersonConsidered() {
-    // same test as everyAttendeeIsConsidered but Person C is optional and has an event between 8:30
-    // and 9 am, losing the middle slot because meetings are back to back?
+    // same test as everyAttendeeIsConsidered but Person C is optional and has an event between 
+    // 8:30 and 9 am, losing the middle slot because meetings are back to back?
 
     // Events  :       |--A--|     |--B--|
     //                       |--C--|
