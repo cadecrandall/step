@@ -29,17 +29,20 @@ window.onload = function() {
 async function checkLogin() {
   const response = await fetch('/login');
   const messageArr = await response.json();
+  const commentFormID = 'compose-comment-form';
+  const deleteCommentsID = 'delete-comments';
+  const loginID = 'login';
+  const styleNone = 'none';
 
   if (messageArr[0] == 'true') {
     // TODO: display email address in message
-    document.getElementById('login').innerHTML = "<p>You're logged in as " 
+    document.getElementById(loginID).innerHTML = "<p>You're logged in as " 
          + messageArr[2] + ". Logout <a href=\"" + messageArr[1] + "\">here</a>.</p>";
   } else {
-    document.getElementById('login').innerHTML = "<p>Login <a href=\"" + messageArr[1]
+    document.getElementById(loginID).innerHTML = "<p>Login <a href=\"" + messageArr[1]
          + "\">here</a> to share a comment.</p>";
-    document.getElementById('compose-comment-form').style.display = "none";
-    document.getElementById('delete-comments').style.display = "none";
-  }
+    document.getElementById(commentFormID).style.display = styleNone;
+    document.getElementById(deleteCommentsID).style.display = styleNone;
 }
 
 async function displayComments() {
@@ -54,10 +57,10 @@ async function displayComments() {
   var output = [];
 
   messageArr.forEach(function(comment) {
-    var date = new Date(parseInt(comment.timestamp)).toDateString();
+    var dateString = new Date(parseInt(comment.timestamp)).toDateString();
     var container = `<div class='comment'>
     <div class="username">${comment.username}</div>
-    <div class="date">Posted on ${date}</div>
+    <div class="date">Posted on ${dateString}</div>
     <p>${comment.message}</p>`;
     if (comment.imageURL != null) {
       container += `<div class="comment-img-crop"><img src="${comment.imageURL}"></div>`;
