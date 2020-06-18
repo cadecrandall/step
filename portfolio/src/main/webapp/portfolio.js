@@ -12,10 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
+// global variables
+const commentFormID = 'compose-comment-form';
+const deleteCommentsID = 'delete-comments';
+const loginID = 'login';
+const styleNone = 'none';
+const commentFieldID = 'comments-field';
+
 /**
  * Loads sidebar navigation from sidebar.html and underlines current page
  */
-
 window.onload = function() {
   $(".sidebar").load("sidebar.html", function() {
     var currentPageId = window.location.pathname.slice(1, -5);
@@ -29,10 +36,7 @@ window.onload = function() {
 async function checkLogin() {
   const response = await fetch('/login');
   const messageArr = await response.json();
-  const commentFormID = 'compose-comment-form';
-  const deleteCommentsID = 'delete-comments';
-  const loginID = 'login';
-  const styleNone = 'none';
+
 
   if (messageArr[0] == 'true') {
     // TODO: display email address in message
@@ -43,6 +47,7 @@ async function checkLogin() {
          + "\">here</a> to share a comment.</p>";
     document.getElementById(commentFormID).style.display = styleNone;
     document.getElementById(deleteCommentsID).style.display = styleNone;
+  }
 }
 
 async function displayComments() {
@@ -69,15 +74,15 @@ async function displayComments() {
     output.push(container);
   });
   
-  document.getElementById('comments-field').innerHTML = output.join("");
+  document.getElementById(commentFieldID).innerHTML = output.join("");
 }
 
 /** Grab the BlobStore URL for image upload and change the onsubmit action */
 function fetchBlobstoreURL() {
   fetch('/blobstore-upload-URL')
-      .then((response) => response.text())
-      .then((imageUploadURL) => {
-        const form = document.getElementById('compose-comment-form');
-        form.action = imageUploadURL;
-      });
+    .then((response) => response.text())
+    .then((imageUploadURL) => {
+      const form = document.getElementById(commentFormID);
+      form.action = imageUploadURL;
+    });
 }
